@@ -2,6 +2,7 @@ import css from 'components/Filter/Filter.module.css'
 import PropTypes from "prop-types";
 
 const Filter = ({ filter, handelChange }) => {
+    console.log(filter);
     
     return (
         <div className={css.formGrup}>
@@ -16,7 +17,7 @@ export default Filter
 
 Filter.propTypes = {
 
-    filter: PropTypes.string.isRequired,
+    filter: PropTypes.string,
      handelChange: PropTypes.func.isRequired,
     
 }
