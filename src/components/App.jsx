@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
 // import { nanoid } from "nanoid";
 import ContactsItem from 'components/ContactsItem/ContactsItem.jsx';
 import FormAddPhone from 'components/FormAddPhone/FormAddPhone.jsx';
@@ -15,20 +15,9 @@ import { getFilteredContacts } from "redux/contacts/contactsSelector";
 
 export function App() {
   
-  // const [contacts, setContacts] = useState(() => {
-  //   const value = JSON.parse(localStorage.getItem("contacts"));
-  //   return value ?? [];
-  // });
- 
-  // const [filter, setFilter] = useState('')
-
   const contacts = useSelector(getFilteredContacts);
     const filter = useSelector(getFilter);
     const dispatch = useDispatch();
-
-useEffect(() => {
-    localStorage.setItem("contacts", JSON.stringify(contacts));
-  }, [contacts])
 
 
 const onAddContact = (contact) => {
@@ -38,14 +27,6 @@ const onAddContact = (contact) => {
     
   const action = addContact(contact);
         dispatch(action);
-  
-  // setContacts((prev) => {
-  //     const newContact = {
-  //     id: nanoid(),
-  //     ...contact
-  //   }
-  //     return [...prev, newContact]
-  //     })
     
   }
 
@@ -54,18 +35,11 @@ const onAddContact = (contact) => {
        const action = removeContact(id);
         dispatch(action);
 
-    // setContacts((prev) => {
-    //   const newContacts = prev.filter((contact) => contact.id !== id);
-    //   return newContacts;
-    //   })
 }
-      
-    
+  
      const handelChange = (event) => {
        const { value } = event.target;
        dispatch(setFilter(value));
-
-      //  setFilter(value);
   }
 
    const isCopy = ({ name }) => {
@@ -73,23 +47,6 @@ const onAddContact = (contact) => {
     return result;
   }
 
-//   const   getFilterContacts = () => {
-//     if (!filter) {
-//       return contacts;
-//     }
-//     const registerFilter = filter.toLocaleLowerCase();
-//     const filterContacts = contacts.filter(({ name }) => {
-//       const registerName = name.toLocaleLowerCase();
-//       const result = registerName.includes(registerFilter);
-//       return result;
-//     })
-
-//     return filterContacts;
-// }
-
-  // const { addContact, handelChange,  removeContact } = this;
-  
-  // const filterContacts = getFilterContacts();
   
  return (
       <div
@@ -108,13 +65,11 @@ const onAddContact = (contact) => {
         <FormAddPhone onSubmit={onAddContact} />
         <Filter filter={filter} handelChange={handelChange} />
         <h2 className={css.title}>Contacts</h2>
-        <ContactsItem items={contacts} removeContact={onRemoveContact}/>
+        {contacts && <ContactsItem items={contacts} removeContact={onRemoveContact}/>}
       </div>
     );
       }
  
-
-
 
 App.propTypes = {
 
